@@ -58,7 +58,7 @@ pass_thorugh_y.set_filter_limits(axis_min,axis_max)
 
 Keeping track of above difference and following previous steps from [Exercise-1](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-1/report.md), [Exercise-2](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-2/report.md), [Exercise-3](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-3/report.md)  we should be able to detect and label objects from different worlds.
 
-To train the data from different worlds 'models` array in [capture_features.py](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-3/sensor_stick/scripts/capture_features.py)  is changed to different objects stated in [pick_list_1.yaml](https://github.com/rupimanoj/Perception-3D/blob/master/pr2_robot/config/pick_list_1.yaml) , [pick_list_2.yaml](https://github.com/rupimanoj/Perception-3D/blob/master/pr2_robot/config/pick_list_2.yaml),  [pick_list_3.yaml](https://github.com/rupimanoj/Perception-3D/blob/master/pr2_robot/config/pick_list_3.yaml) files.
+To train the data from different worlds `models` array in [capture_features.py](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-3/sensor_stick/scripts/capture_features.py)  is changed to different objects stated in [pick_list_1.yaml](https://github.com/rupimanoj/Perception-3D/blob/master/pr2_robot/config/pick_list_1.yaml) , [pick_list_2.yaml](https://github.com/rupimanoj/Perception-3D/blob/master/pr2_robot/config/pick_list_2.yaml),  [pick_list_3.yaml](https://github.com/rupimanoj/Perception-3D/blob/master/pr2_robot/config/pick_list_3.yaml) files.
 
 ### Capturing training data for differnt worlds and training SVM classifier.
 
@@ -118,6 +118,8 @@ accuracy score: 0.96 <br/>
 ![alt text][World3] <br/>
 
 In world3, glue objec is not getting detected as clustering logic is not able to capture it when it is hiding behind other objects. The pass scenario in this case is 7/8 . <br/>
+
+All the models and training data is saved in [models](https://github.com/rupimanoj/Perception-3D/tree/master/pr2_robot/scripts/models) folder.
 
 With the above trained models, we should be able to detect and label objects in different worlds. Rest of the report discusses about how to save the output details of objects to be picked.
 
@@ -193,13 +195,15 @@ def publish_to_yaml(labels,centroids):
 Objects to be picked by pr2_robot are obtained by reading parameters `object_list` from ros server. 
 If `detected_objects` contain any object from `objects_list` we fill relevant details.
 
-	`object_list_param = rospy.get_param('/object_list')` <br/>
+	`object_list_param = rospy.get_param('/object_list')` 
 
 By traversing through above parameter list, we can get `object_name`, `arm_name`. <br/>
 
-Objects place location is found by reading parametes from `dropbox` ros server. By reading parameters `place_pose` can be filled.
+Objects place location is found by reading parametes from `dropbox` ros server. By reading parameters `place_pose` can be filled. <br/>
 	`dropbox_params = rospy.get_param('/dropbox')` <br/>
 
 'pick_pose' is filled using previously filled centroid location of objects.
 
 Once all the required details are collected, details are written to output file using artifact function `send_to_yaml`.
+
+OUtput files for different worlds are stored in [output_files](https://github.com/rupimanoj/Perception-3D/tree/master/output_files) folder.
