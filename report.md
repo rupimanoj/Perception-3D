@@ -206,4 +206,4 @@ Objects place location is found by reading parametes from `dropbox` ros server. 
 
 Once all the required details are collected, details are written to output file using artifact function `send_to_yaml`.
 
-OUtput files for different worlds are stored in [output_files](https://github.com/rupimanoj/Perception-3D/tree/master/output_files) folder.
+Output files for different worlds are stored in [output_files](https://github.com/rupimanoj/Perception-3D/tree/master/output_files) folder.
