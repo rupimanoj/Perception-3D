@@ -1,14 +1,14 @@
-[World1_UN]: ./misc_images/World1-UN.PNG
-[World2_UN]: ./misc_images/World2-UN.PNG
-[World3_UN]: ./misc_images/World3-UN.PNG
-[World1_N]: ./misc_images/World1-N.PNG
+[World1_UN]: ./misc_images/World1-UN.png
+[World2_UN]: ./misc_images/World2-UN.png
+[World3_UN]: ./misc_images/World3-UN.png
+[World1_N]: ./misc_images/World1-N.png
 [World2_N]: ./misc_images/World2-N.png
 [World3_N]: ./misc_images/World3-N.png
-[World1]: ./misc_images/world1.png
-[World2]: ./misc_images/world_2.png
-[World3]: ./misc_images/world_3.png
-[table_top]: ./misc_images/pr2_world.png
-[noise_removed]: ./misc_images/noise_removed.png
+[World1]: ./misc_images/world1.PNG
+[World2]: ./misc_images/world_2.PNG
+[World3]: ./misc_images/world_3.PNG
+[table_top]: ./misc_images/pr2_world.PNG
+[noise_removed]: ./misc_images/noise_removed.PNG
 
 Following steps in [Exercise-1](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-1/report.md), [Exercise-2](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-2/report.md), [Exercise-3](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-3/report.md) we should be able to detect and label objects placed on table top.
 
