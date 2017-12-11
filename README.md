@@ -1,4 +1,4 @@
-[![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://www.udacity.com/robotics)
+[![Watch the video](../misc_images/Objects.PNG)](https://youtu.be/Wbmce0prOFo)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Wbmce0prOFo" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 
