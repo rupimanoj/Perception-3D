@@ -4,7 +4,7 @@
 # Reports
 Warehouse pick and place challenge is divided into four sections. 
 * [Table top segmentation](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-1/report.md)  - Remove outliers such as tables from the scene using RANSAC plane segmentation
-* [Cluster object point clouds](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-2/report.md) - Label pixels of same object with same color using elucidian clustering techniques
+* [Clustering point clouds of objects to be picked](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-2/report.md) - Label pixels of same object with same color using elucidian clustering techniques
 * [Object Recognition Pipeline](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-3/report.md) - Train SVM classifier and using trained model tag each detected cluster in above step with object name
 * [Collision avoidance motion planning](https://github.com/rupimanoj/Perception-3D/blob/master/report.md) - Calculate centroids of each object to determine pick location and generate collision avoidance maps to complete place operation smoothly.
 
