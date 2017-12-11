@@ -1,8 +1,8 @@
 # Final output - Demonstration
 [![Watch the video](https://github.com/rupimanoj/Perception-3D/blob/master/misc_images/Objects.PNG)](https://youtu.be/Wbmce0prOFo)
 
-# Reports
-Warehouse pick and place challenge is divided into four sections. 
+# Implementation details and Reports
+Warehouse pick and place challenge is divided into four sections. Details of each section can be found from below links.
 * [Table top segmentation](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-1/report.md)  - Remove outliers such as tables from the scene using RANSAC plane segmentation
 * [Clustering point clouds of objects to be picked](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-2/report.md) - Label pixels of same object with same color using elucidian clustering techniques
 * [Object Recognition Pipeline](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-3/report.md) - Train SVM classifier and using trained model tag each detected cluster in above step with object name
