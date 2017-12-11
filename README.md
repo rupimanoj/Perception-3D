@@ -1,8 +1,17 @@
+# Final output - Demonstration
 [![Watch the video](https://github.com/rupimanoj/Perception-3D/blob/master/misc_images/Objects.PNG)](https://youtu.be/Wbmce0prOFo)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Wbmce0prOFo" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+# Reports
+Warehouse pick and place challenge is divided into four sections. 
+* [Table top segmentation](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-1/report.md)  - Remove outliers such as tables from the scene using RANSAC plane segmentation
+* [Cluster object point clouds](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-2/report.md) - Label pixels of same object with same color using elucidian clustering techniques
+* [Object Recognition Pipeline](https://github.com/rupimanoj/Perception-Exercises/blob/master/Exercise-3/report.md) - Train SVM classifier and using trained model tag each detected cluster in above step with object name
+* [Collision avoidance motion planning](https://github.com/rupimanoj/Perception-3D/blob/master/report.md) - Calculate centroids of each object to determine pick location and generate collision avoidance maps to complete place operation smoothly.
 
-# 3D Perception
+
+To get the context on the project and setup details please refer below sections. Implementation details and limitations of the project can be found from above reports.
+
+## 3D Perception
 Before starting any work on this project, please complete all steps for [Exercise 1, 2 and 3](https://github.com/udacity/RoboND-Perception-Exercises). At the end of Exercise-3 you have a pipeline that can identify points that belong to a specific object.
 
 In this project, you must assimilate your work from previous exercises to successfully complete a tabletop pick and place operation using PR2.
@@ -11,7 +20,7 @@ The PR2 has been outfitted with an RGB-D sensor much like the one you used in pr
 
 Given the cluttered tabletop scenario, you must implement a perception pipeline using your work from Exercises 1,2 and 3 to identify target objects from a so-called “Pick-List” in that particular order, pick up those objects and place them in corresponding dropboxes.
 
-# Project Setup
+## Project Setup
 For this setup, catkin_ws is the name of active ROS Workspace, if your workspace name is different, change the commands accordingly
 If you do not have an active ROS workspace, you can create one by:
 
@@ -84,7 +93,7 @@ You can launch the project scenario like this:
 ```sh
 $ roslaunch pr2_robot pick_place_project.launch
 ```
-# Required Steps for a Passing Submission:
+## Required Steps for a Passing Submission:
 1. Extract features and train an SVM model on new objects (see `pick_list_*.yaml` in `/pr2_robot/config/` for the list of models you'll be trying to identify). 
 2. Write a ROS node and subscribe to `/pr2/world/points` topic. This topic contains noisy point cloud data that you must work with.
 3. Use filtering and RANSAC plane fitting to isolate the objects of interest from the rest of the scene.
@@ -95,7 +104,7 @@ $ roslaunch pr2_robot pick_place_project.launch
 8. Submit a link to your GitHub repo for the project or the Python code for your perception pipeline and your output `.yaml` files (3 `.yaml` files, one for each test world).  You must have correctly identified 100% of objects from `pick_list_1.yaml` for `test1.world`, 80% of items from `pick_list_2.yaml` for `test2.world` and 75% of items from `pick_list_3.yaml` in `test3.world`.
 9. Congratulations!  Your Done!
 
-# Extra Challenges: Complete the Pick & Place
+## Extra Challenges: Complete the Pick & Place
 7. To create a collision map, publish a point cloud to the `/pr2/3d_map/points` topic and make sure you change the `point_cloud_topic` to `/pr2/3d_map/points` in `sensors.yaml` in the `/pr2_robot/config/` directory. This topic is read by Moveit!, which uses this point cloud input to generate a collision map, allowing the robot to plan its trajectory.  Keep in mind that later when you go to pick up an object, you must first remove it from this point cloud so it is removed from the collision map!
 8. Rotate the robot to generate collision map of table sides. This can be accomplished by publishing joint angle value(in radians) to `/pr2/world_joint_controller/command`
 9. Rotate the robot back to its original state.
