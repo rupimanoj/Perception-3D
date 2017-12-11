@@ -1,4 +1,4 @@
-[![Watch the video](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](https://youtu.be/Wbmce0prOFo)
+[![Watch the video](https://github.com/rupimanoj/Perception-3D/blob/master/misc_images/Objects.PNG)](https://youtu.be/Wbmce0prOFo)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Wbmce0prOFo" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 
