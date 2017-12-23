@@ -123,87 +123,31 @@ All the models and training data is saved in [models](https://github.com/rupiman
 
 With the above trained models, we should be able to detect and label objects in different worlds. Rest of the report discusses about how to save the output details of objects to be picked.
 
-## Writing pick and place locations to output files
 
-Once indvidual object labels and point clouds are stored in detected, individual objects centroid is calculated so that pr2_robot can pick up object succesfully.
+
+## picking and droping objects
+
+Once indvidual object labels and point clouds are stored in detected_objects, cloud data is sent to pr2_mover function where further processing is done to calculate pick up centroid locations and drop locations. For different world locations pickup and drop locations of objects are stored in below yaml files.<br/>
+
+[output_files](https://github.com/rupimanoj/Perception-3D/tree/master/output_files) folder.<br/>
+
+
+In the same function, collision avoidance map is published to topic `/pr2/3d_map/points` such that manipulation framework will move robot hands to avoid collisions with any other objects while picking and dropping. <br/>
+After each object is picked, collision avoidance map is updated accordingly to exclude the dropped objects and the next object to be picked from collision avoidance point cloud data. <br/>
+
+Below code takes care of updating collison avoidance map after each pickup.br/>
 
 ``` python
-points_arr = ros_to_pcl(pcl_cluster_ros).to_array()
-center = np.mean(points_arr, axis=0)[:3]
-center_float = []
-for item in center:
-	center_float.append(np.asscalar(item))
-centroids.append(center_float)
+temp_cloud = PointCloud2()
+
+rospy.wait_for_service('clear_octomap')
+clear_octomap = rospy.ServiceProxy('clear_octomap', std_srvs.srv.Empty)
+resp_clear = clear_octomap()
+print("cleared..?")
+time.sleep(5)
+
+for object in object_list:
+	if object.label not in picked_list and (not(object.label == object_name.data)):
+		temp_cloud = ros_to_pcl2(temp_cloud, pcl_to_ros(map_pcl[object.label]))
+collide_objects_pub.publish(temp_cloud)
 ```
-
-To output the details into yaml file, `publish_to_yaml` function is used.
-
-``` python
-
-def publish_to_yaml(labels,centroids):
-
-	world_no = 1  ## change according to the world environment
-	out_file_name = 'output_1.yaml'
-
-	object_list_param = rospy.get_param('/object_list')
-	dropbox_params = rospy.get_param('/dropbox')
-	left_drop_position = []
-	right_drop_position = []
-
-	for k in range(0, len(dropbox_params)):
-		if(dropbox_params[k]['group'] == 'red'):
-			left_drop_position = dropbox_params[k]['position']
-		if(dropbox_params[k]['group'] == 'green'):
-
-			right_drop_position = dropbox_params[k]['position']
-			
-	test_scene_num = Int32()
-	test_scene_num.data = world_no
-	object_name = String()
-	arm_name = String()
-	pick_pose = Pose()
-	place_pose = Pose()
-
-	dict_list = []
-
-	for item in object_list_param:
-		for index,label in enumerate(labels):
-			if(item['name'] == label):
-				
-				object_name.data = item['name']
-				if(item['group'] == 'red'):
-					arm_name.data = 'left'
-					place_pose.position.x = left_drop_position[0]
-					place_pose.position.y = left_drop_position[1]
-					place_pose.position.z = left_drop_position[2]
-				if(item['group'] == 'green'):
-					arm_name.data = 'right'
-					place_pose.position.x = right_drop_position[0]
-					place_pose.position.y = right_drop_position[1]
-					place_pose.position.z = right_drop_position[2]
-
-				pick_pose.position.x = centroids[index][0]
-				pick_pose.position.y = centroids[index][1]
-				pick_pose.position.z = centroids[index][2]
-				yaml_dict = make_yaml_dict(test_scene_num, arm_name, object_name, pick_pose, place_pose)
-				dict_list.append(yaml_dict)
-	
-	send_to_yaml(out_file_name,dict_list)
-
-```
-
-Objects to be picked by pr2_robot are obtained by reading parameters `object_list` from ros server. 
-If `detected_objects` contain any object from `objects_list` we fill relevant details.
-
-	`object_list_param = rospy.get_param('/object_list')` 
-
-By traversing through above parameter list, we can get `object_name`, `arm_name`. <br/>
-
-Objects place location is found by reading parametes from `dropbox` ros server. By reading parameters `place_pose` can be filled. <br/>
-	`dropbox_params = rospy.get_param('/dropbox')` <br/>
-
-'pick_pose' is filled using previously filled centroid location of objects.
-
-Once all the required details are collected, details are written to output file using artifact function `send_to_yaml`.
-
-Output files for different worlds are stored in [output_files](https://github.com/rupimanoj/Perception-3D/tree/master/output_files) folder.
